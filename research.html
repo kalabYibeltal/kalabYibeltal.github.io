@@ -6,6 +6,31 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			#main > .post:first-child { padding-bottom: 1rem; }
+			#main > .post + .post { padding-top: 3rem; }
+			.pub-list { list-style: none; padding-left: 0; margin-bottom: 0; }
+			.pub-list > li { padding: 1.25rem 0; border-bottom: solid 1px rgba(33, 33, 33, 0.15); }
+			.pub-list > li:last-child { border-bottom: none; }
+			.pub-list h3 { margin-bottom: 0.5rem; }
+			.pub-list p { margin-bottom: 0.75rem; }
+			.pub-list ul.actions { margin-bottom: 0; }
+			.tag {
+				display: inline-block;
+				font-size: 0.7rem;
+				font-weight: 700;
+				letter-spacing: 0.075rem;
+				text-transform: uppercase;
+				padding: 0.15rem 0.6rem;
+				margin-right: 0.5rem;
+				border-radius: 2px;
+				vertical-align: middle;
+				border: solid 2px #212931;
+			}
+			.tag.published { background: #212931; color: #ffffff; }
+			.tag.review { background: transparent; color: #212931; }
+			.tag.ongoing { background: transparent; color: #18bfef; border-color: #18bfef; }
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -22,6 +47,7 @@
 						<ul class="links">
 							<li ><a href="index.html">About</a></li>
 							<li class="active"><a href="research.html">Research / Projects</a></li>
+							<li><a href="index.html#technologies">Technologies</a></li>
 							<li ><a href="https://drive.google.com/file/d/16jfZTBXnlyd2YHut5KKFHOAfUcS029Zx/view?usp=sharing">Resume</a></li>
 							<li><a href="hobbies.html">Hobbies</a></li>
 						</ul>
@@ -35,32 +61,105 @@
 
 				<!-- Main -->
 					<div id="main">
-						<section class="posts">
-							<article>
-								<header>
-									<span class="date">June, 2023</span>
-								</header>
-								<a href="#" class="image fit"><img src="images/bsc_thesis.png" alt="" /></a>
-								<p>A digital vending maching implemntation. Hardware prototype, Mobile application and user data analysis web application.</p>
-								<ul class="actions special">
-									<li><a href="https://youtu.be/ZRG3mo7nYgw" class="button primary icon solid fa-video">Demo Video</a></li>
-									<li><a href="https://drive.google.com/file/d/1vJbismgmRbRX7alpz9TwNqrEfrQFDRF2/view?usp=sharing" class="button icon solid fa-file-alt">Paper</a></li>
-								</ul>
-							</article>
-							<article>
-								<header>
-									<span class="date">July, 2022</span>
-							
-								</header>
-								<a href="#" class="image fit"><img src="images/aura.png" alt="" /></a>
-								<p>Worked in the optimization of the placement of 
-									header cells on the temperature sensor chip. with python, and TCL.</p>
-								<ul class="actions special">
-									<li><a href="https://www.youtube.com/watch?v=ZOusBf09QAI" class="button primary icon solid fa-video">Video</a></li>
-									<li><a href="https://docs.google.com/presentation/d/120JVBRK4GTihfDlOFGa1xOIWYUNp0rnW_tp8m-pIs8s/edit?usp=sharing" class="button icon solid fa-file-alt">Slides</a></li>
-								</ul>
-							</article>
-							
+						<!-- Publications -->
+						<section class="post">
+							<header class="major">
+								<h2>Publications</h2>
+							</header>
+							<ul class="pub-list">
+								<li>
+									<h3><span class="tag published">ISPASS 2026</span>ORAM Characterization</h3>
+									<p>
+										Oblivious RAM (ORAM) hides a program's memory access pattern from anyone
+										watching memory traffic, at the cost of significant extra bandwidth and latency.
+										We implemented multiple ORAM algorithms and characterized their performance on
+										large-scale inputs, measuring how each scheme's overheads grow with data size so
+										that the cost of access-pattern privacy can be compared across designs.
+									</p>
+								</li>
+								<li>
+									<h3><span class="tag review">Under Review</span>SENTRY: A Distributed Root of Trust for Chiplets</h3>
+									<p>
+										A distributed hardware Root of Trust for untrusted third-party chiplets, built on
+										Sequestered Encryption (SE). SENTRY provides SE-protected attestation, runtime
+										monitoring, and control-flow integrity, cutting trusted-silicon area 68&times;
+										(3.4% to 0.05% per chiplet) at 4.97% performance overhead. I designed a custom
+										RISC-V ISA extension and a multi-chiplet gem5 prototype, synthesized the secure
+										enclave in Ibex RTL (48.6 kGE), and modeled attack success probability as a
+										function of monitoring interval.
+									</p>
+								</li>
+								<li>
+									<h3><span class="tag review">Under Review</span>HashStep: A Low-Trust Architecture for Data and Computation Integrity Enforcement</h3>
+									<p>
+										A RISC-V ISA extension and small hardware enclave that let clients verify an untrusted
+										cloud server ran the right program on unmodified, encrypted data. Each instruction
+										extends a provenance hash that travels with its result, so the client checks the whole
+										computation with one hash comparison. We proved the security guarantee in Lean,
+										verified the RTL with JasperGold model checking, and measured a 3.4&times; geomean
+										overhead in gem5.
+									</p>
+								</li>
+							</ul>
+						</section>
+
+						<!-- Research -->
+						<section class="post">
+							<header class="major">
+								<h2>Research</h2>
+							</header>
+							<ul class="pub-list">
+								<li>
+									<h3><span class="tag ongoing">Ongoing</span>Microarchitectural Side-Channel Defense</h3>
+									<p>
+										Reproduced the Hertzbleed DVFS timing attack to recover SIKE keys on Intel x86,
+										then designed, implemented, and evaluated a set of defenses, including core-interleaved
+										pipelining, randomized P-state control, and malicious-input filtering. We characterize
+										each defense's leakage against the information-theoretic bounds of prior work, along
+										with its performance overhead.
+									</p>
+								</li>
+								<li>
+									<h3><span class="tag ongoing">Ongoing</span>SpecFlow: Formally Verified Secure Microarchitecture</h3>
+									<p>
+										Co-developing SpecFlow, a Lean 4 DSL with mechanized semantics for proving
+										non-interference in pipelined processors. Built an RV64IM core toward booting
+										Linux and modeled Spectre-v1, PortSmash, and Prime+Probe attacks along with
+										defenses that provably close them.
+									</p>
+								</li>
+								<li>
+									<h3><span class="tag ongoing">Ongoing</span>Chiplet Interconnect Modeling</h3>
+									<p>
+										Contributed to a protocol-aware gem5/SST simulation framework for cache-coherent
+										CHI-C2C traffic over UCIe, modeling granule-based flit packing, class-specific
+										credit flow control, and end-to-end backpressure to expose performance effects
+										missed by constant-latency link models.
+									</p>
+								</li>
+								<li>
+									<h3>Temperature Sensor Header Cell Placement <span style="font-weight: 400; font-size: 0.8em;">&middot; 2022</span></h3>
+									<p>
+										Optimized the placement of header cells on a temperature sensor chip using
+										open-source tools such as OpenFASOC and OpenROAD, with Python and TCL.
+									</p>
+									<ul class="actions">
+										<li><a href="https://www.youtube.com/watch?v=ZOusBf09QAI" class="button small icon solid fa-video">Video</a></li>
+										<li><a href="https://docs.google.com/presentation/d/120JVBRK4GTihfDlOFGa1xOIWYUNp0rnW_tp8m-pIs8s/edit?usp=sharing" class="button small icon solid fa-file-alt">Slides</a></li>
+									</ul>
+								</li>
+								<li>
+									<h3>Digital Vending Machine (B.S. Thesis) <span style="font-weight: 400; font-size: 0.8em;">&middot; 2023</span></h3>
+									<p>
+										A digital vending machine implementation: hardware prototype, mobile application,
+										and a web application for analyzing user data.
+									</p>
+									<ul class="actions">
+										<li><a href="https://youtu.be/ZRG3mo7nYgw" class="button small icon solid fa-video">Demo Video</a></li>
+										<li><a href="https://drive.google.com/file/d/1vJbismgmRbRX7alpz9TwNqrEfrQFDRF2/view?usp=sharing" class="button small icon solid fa-file-alt">Paper</a></li>
+									</ul>
+								</li>
+							</ul>
 						</section>
 
 <!-- 
